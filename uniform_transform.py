@@ -2,15 +2,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Uniform transformation
-def f(x):
-    return - np.log(x)
+def f(x, y):
+    return x * y
 
 def g(x):
-    return np.exp(-x)
+    return -np.log(x)
 
 def define_range_transform() -> tuple:
     """Whan applying transform to uniform values, the image may differ from 0,1"""
-    return 0.,10.
+    return 0,1
 
 def plot_histogram(samples: np.ndarray, _config: dict) -> None:
     kwargs = _config if _config else dict()
@@ -20,7 +20,8 @@ def plot_histogram(samples: np.ndarray, _config: dict) -> None:
 def uniform_transform(N=10_000) -> np.ndarray:
     # Uniform sampling
     X = np.random.random(size=N)
-    return np.array([f(s) for s in X])
+    Y = np.random.random(size=N)    
+    return np.array([f(X[s], Y[s]) for s in range(N)])
 
 def plot_expected_pdf(pdf: callable, interval: tuple, n_points: int, _config: dict) -> None:
     kwargs = _config if _config else dict()
