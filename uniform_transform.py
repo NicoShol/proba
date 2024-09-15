@@ -1,12 +1,17 @@
+"""
+Simple script to test Uniform distribution transform
+Check the commit history to find examples.
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 
 # Uniform transformation
 def f(x, y):
-    return x * y
+    return max(x,y)
 
 def g(x):
-    return -np.log(x)
+    return 2 * x
 
 def define_range_transform() -> tuple:
     """Whan applying transform to uniform values, the image may differ from 0,1"""
@@ -20,8 +25,8 @@ def plot_histogram(samples: np.ndarray, _config: dict) -> None:
 def uniform_transform(N=10_000) -> np.ndarray:
     # Uniform sampling
     X = np.random.random(size=N)
-    Y = np.random.random(size=N)    
     return np.array([f(X[s], Y[s]) for s in range(N)])
+    Y = np.random.random(size=N)    
 
 def plot_expected_pdf(pdf: callable, interval: tuple, n_points: int, _config: dict) -> None:
     kwargs = _config if _config else dict()
